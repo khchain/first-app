@@ -69,7 +69,7 @@ export function Navbar() {
           </a>
         </div>
 
-        <div className="order-2 md:order-3 flex items-center" id="nav-content">
+        {/* <div className="order-2 md:order-3 flex items-center" id="nav-content">
           <div className="flex border-2 border-gray-200 rounded ">
             <input
               type="text"
@@ -88,7 +88,7 @@ export function Navbar() {
               </svg>
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
