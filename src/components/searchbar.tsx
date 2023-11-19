@@ -7,7 +7,7 @@ export function Searchbar() {
   return (
     <>
       
-        <div className="container mx-auto bg-red-500 rounded-lg p-14 flex items-center justify-center">
+        <div className=" container mx-auto bg-red-500 rounded-lg p-14 flex items-center justify-center">
           <form>
             <h1 className="text-center font-bold text-white text-6xl">
               قیمت کلای آمازون رو به تومن ببین !
