@@ -7,7 +7,7 @@ export function Searchbar() {
   return (
     <>
       
-        <div className=" container mx-auto bg-red-500 rounded-lg p-14 flex items-center justify-center">
+        <div className=" container mx-auto bg-red-600 rounded-lg p-14 flex items-center justify-center">
           <form>
             <h1 className="text-center font-bold text-white text-6xl">
               قیمت کلای آمازون رو به تومن ببین !
@@ -25,7 +25,7 @@ export function Searchbar() {
               <div className="ms:flex items-center px-2 rounded-lg space-x-4 mx-auto ">
                 <button
                   type="submit"
-                  className="bg-indigo-500 text-white text-base rounded-lg px-4 py-2 font-thin"
+                  className="bg-green-600 text-white text-base rounded-lg px-4 py-2 font-thin"
                 >
                   جستجو
                 </button>
