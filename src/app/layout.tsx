@@ -22,8 +22,8 @@ export default function RootLayout({
 
         <div className="my-4 mx-7 ">
           <Searchbar />
-          {children}
         </div>
+        <div className="my-4 mx-7 ">{children}</div>
       </body>
     </html>
   );
