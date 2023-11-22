@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 
 export function ProductDetails() {
+  const [quantity, setQuantity] = useState(0);
   return (
     <>
       <section className="overflow-hidden   rounded-lg h-min bg-white my-6  p-6 container mx-auto    ">
@@ -165,15 +166,29 @@ export function ProductDetails() {
                     تعداد
                   </label>
                   <div className="relative flex flex-row w-full h-10 mt-6 bg-transparent rounded-lg">
-                    <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-r outline-none cursor-pointer   hover:text-gray-700  hover:bg-gray-400">
+                    <button
+                      onClick={() => {
+                        if (quantity !== 0) {
+                          setQuantity(quantity - 1);
+                        }
+                      }}
+                      className="w-20 h-full text-gray-600 bg-gray-300 rounded-r outline-none cursor-pointer   hover:text-gray-700  hover:bg-gray-400"
+                    >
                       <span className="m-auto text-2xl font-thin">-</span>
                     </button>
                     <input
+                    disabled
                       type="number"
+                      
+                      value={quantity}
                       className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none    focus:outline-none text-md hover:text-black"
-                      placeholder="1"
                     />
-                    <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer   hover:text-gray-700 hover:bg-gray-400">
+                    <button
+                      onClick={() => {
+                        setQuantity(quantity + 1);
+                      }}
+                      className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer   hover:text-gray-700 hover:bg-gray-400"
+                    >
                       <span className="m-auto text-2xl font-thin">+</span>
                     </button>
                   </div>
