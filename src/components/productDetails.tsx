@@ -1,10 +1,28 @@
 "use client";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { calculetPrice,addCommasToNumber } from "../app/utils/pricecal";
+import {useFetchData} from '../hooks/useFetchData'
 
 export function ProductDetails() {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+
+  const searchParams = useSearchParams();
+  const productLink : any  = searchParams.get("link");
+  const { data, error, isLoading } = useFetchData(productLink);
+ 
+  //  console.log(data?.price);
+   console.log( error , isLoading);
+
+ 
+  
+  const {totalPrice, deliveryPrice, wagePrice, UAEPrice, IRPrice, UAESheppingPrice, IRSheppingPrice} = calculetPrice(data?.price);
+  // const priceDetails = calculetPrice(product.price);
+  // const priceDetailssemi = addCommasToNumber(priceDetails)
+// const {numStr} = addCommasToNumber({number:totalPrice});
   return (
     <>
+     
       <section className="overflow-hidden   rounded-lg h-min bg-white my-6  p-6 container mx-auto    ">
         <div className="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
           <div className="flex flex-wrap -mx-4">
@@ -12,7 +30,7 @@ export function ProductDetails() {
               <div className="sticky top-0 z-50 overflow-hidden ">
                 <div className="relative mb-6 lg:mb-10 lg:h-2/4 ">
                   <img
-                    src="https://i.postimg.cc/6qcPhTQg/R-18.png"
+                    src={data?.image}
                     alt=""
                     className="object-cover w-full lg:h-full "
                   />
@@ -77,13 +95,15 @@ export function ProductDetails() {
                     {/* <a className="text-sm text-red-400 " href="#">
                       Get delivery dates
                     </a> */}
-                    <h3>قیمت ارزی :900درهم</h3>
-                    <h3>قیمت ارزی با تخفیف :700 درهم </h3>
-                    <h3>معادل قیمت ارزی :700,000,000 تومان </h3>
-                    <h3>هزینه شیپینگ به درهم :20 درهم </h3>
-                    <h3>هزینه شیپینگ به تومان :1,000,000 تومان </h3>
-                    <h3>هزینه حمل و گمرک :3,000,000 تومن </h3>
-                    <h3>کارمزد :200,000,000 </h3>
+                   <Suspense fallback={<p>Loading feed...</p>}>
+                    <h3>قیمت ارزی :{totalPrice} درهم</h3>
+                    <h3>قیمت ارزی با تخفیف :{UAEPrice} درهم </h3>
+                    <h3>معادل قیمت ارزی :{IRPrice} تومان </h3>
+                    <h3>هزینه شیپینگ به درهم :{UAESheppingPrice} درهم </h3>
+                    <h3>هزینه شیپینگ به تومان :{IRSheppingPrice} تومان</h3>
+                    <h3>هزینه حمل و گمرک :{deliveryPrice} تومان</h3>
+                    <h3>کارمزد :{wagePrice}تومان </h3>
+                    </Suspense>
                   </div>
                 </div>
               </div>
@@ -92,19 +112,17 @@ export function ProductDetails() {
               <div className=" lg:pl-20">
                 <div className="mb-8 ">
                   <h2 className="max-w-xl mb-6 text-2xl font-bold  md:text-4xl">
-                    Macbook Pro M130c90
+                    {data?.title}
                   </h2>
                   {/* <p className="inline-block mb-6 text-4xl font-bold text-gray-700 ">
                     <span>$1500.99</span>
                     <span className="text-base font-normal text-gray-500 line-through ">
                       $1800.99
                     </span>
-                  </p>
-                  <p className="max-w-md text-gray-700 ">
-                    Lorem ispum dor amet Lorem ispum dor amet Lorem ispum dor
-                    amet Lorem ispum dor amet Lorem ispum dor amet Lorem ispum
-                    dor amet Lorem ispum dor amet Lorem ispum dor amet
                   </p> */}
+                  <p className="max-w-md text-gray-700 ">
+                    {data?.description}
+                  </p>
                 </div>
                 {/* <div className="mb-8">
                   <h2 className="w-16 pb-1 mb-4 text-2xl font-bold border-b border-red-300  ">
@@ -134,7 +152,7 @@ export function ProductDetails() {
                       <button className="px-4 py-2 mb-2 mr-4 font-semibold border rounded-md hover:border-red-400 hover:text-red-600 ">
                         16 GB
                       </button>
-                      <button className="px-4 py-2 mb-2 font-semibold border rounded-md hover:border-red-400 hover:text-red-600 ">
+                      <button className="px-4 py-2 mb-2 mr-4 font-semibold border rounded-md hover:border-red-400 hover:text-red-600 ">
                         1 TB
                       </button>
                     </div>
@@ -152,7 +170,7 @@ export function ProductDetails() {
                       <button className="px-4 py-2 mb-2 mr-4 font-semibold border rounded-md hover:border-red-400 hover:text-red-600 ">
                         112 GB
                       </button>
-                      <button className="px-4 py-2 mb-2 mr-2 font-semibold border rounded-md hover:border-red-400 hover:text-red-600 ">
+                      <button className="px-4 py-2 mb-2 mr-4 font-semibold border rounded-md hover:border-red-400 hover:text-red-600 ">
                         1 TB
                       </button>
                     </div>
@@ -160,7 +178,7 @@ export function ProductDetails() {
                 </div>
                 <div className="w-32 mb-8 ">
                   <label
-                    for=""
+                    htmlFor="quantity"
                     className="w-full pb-1 text-xl font-semibold text-gray-700 border-b border-red-300 "
                   >
                     تعداد
@@ -168,7 +186,7 @@ export function ProductDetails() {
                   <div className="relative flex flex-row w-full h-10 mt-6 bg-transparent rounded-lg">
                     <button
                       onClick={() => {
-                        if (quantity !== 0) {
+                        if (quantity !== 1) {
                           setQuantity(quantity - 1);
                         }
                       }}
@@ -177,9 +195,8 @@ export function ProductDetails() {
                       <span className="m-auto text-2xl font-thin">-</span>
                     </button>
                     <input
-                    disabled
+                      disabled
                       type="number"
-                      
                       value={quantity}
                       className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none    focus:outline-none text-md hover:text-black"
                     />
@@ -198,7 +215,7 @@ export function ProductDetails() {
                   <h2 className="w-28 pb-1 mb-6 text-xl font-semibold border-b border-red-300 ">
                     قیمت نهایی
                   </h2>
-                  <h3>1,800,000 تومان</h3>
+                  <h3>{totalPrice} تومان</h3>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-4">
@@ -216,6 +233,7 @@ export function ProductDetails() {
           </div>
         </div>
       </section>
+      
     </>
   );
 }
