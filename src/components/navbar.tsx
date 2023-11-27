@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export function Navbar() {
@@ -25,12 +26,12 @@ export function Navbar() {
           <nav>
             <ul className="md:flex items-center justify-between text-base text-gray-700 pt-4 md:pt-0">
               <li>
-                <a
+                <Link
                   className="inline-block no-underline hover:text-black hover:underline py-2 px-4"
-                  href="#"
+                  href="/test"
                 >
                   کیس ها
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -61,12 +62,12 @@ export function Navbar() {
         </div>
 
         <div className="order-1 md:order-2  ">
-          <a
+          <Link
             className="flex items-center tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-3xl "
-            href="#"
+            href="/"
           >
-            دکترکیس
-          </a>
+            دکتر دلیوری
+          </Link>
         </div>
 
         {/* <div className="order-2 md:order-3 flex items-center" id="nav-content">
