@@ -92,9 +92,7 @@ export function ProductDetails() {
                     </h2>
                   </div>
                   <div className="mt-2 px-7">
-                    {/* <a className="text-sm text-red-400 " href="#">
-                      Get delivery dates
-                    </a> */}
+                    
                    <Suspense fallback={<p>Loading feed...</p>}>
                     <h3>قیمت ارزی :{totalPrice} درهم</h3>
                     <h3>قیمت ارزی با تخفیف :{UAEPrice} درهم </h3>
@@ -104,6 +102,10 @@ export function ProductDetails() {
                     <h3>هزینه حمل و گمرک :{deliveryPrice} تومان</h3>
                     <h3>کارمزد :{wagePrice}تومان </h3>
                     </Suspense>
+                    
+                    <span className=" text-sm text-red-400 ">
+                    مدت زمان تحویل : 5 الی 8 هفته کاری
+                    </span>
                   </div>
                 </div>
               </div>
