@@ -1,28 +1,21 @@
 "use client";
 import React, { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { calculetPrice,addCommasToNumber } from "../app/utils/pricecal";
-import {useFetchData} from '../hooks/useFetchData'
+import { calculetPrice, addCommasToNumber } from "../app/utils/pricecal";
+import { useFetchData } from "../hooks/useFetchData";
+import { BreakdownPrice } from "./breakdownPrice";
 
 export function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
 
   const searchParams = useSearchParams();
-  const productLink : any  = searchParams.get("link");
+  const productLink: any = searchParams.get("link");
   const { data, error, isLoading } = useFetchData(productLink);
- 
-  //  console.log(data?.price);
-   console.log( error , isLoading);
-
- 
-  
-  const {totalPrice, deliveryPrice, wagePrice, UAEPrice, IRPrice, UAESheppingPrice, IRSheppingPrice} = calculetPrice(data?.price);
-  // const priceDetails = calculetPrice(product.price);
-  // const priceDetailssemi = addCommasToNumber(priceDetails)
-// const {numStr} = addCommasToNumber({number:totalPrice});
+  const { totalPrice } = calculetPrice(data?.price);
+console.log(data, error, isLoading);
   return (
+    
     <>
-     
       <section className="overflow-hidden   rounded-lg h-min bg-white my-6  p-6 container mx-auto    ">
         <div className="max-w-6xl px-4 py-4 mx-auto lg:py-8 md:px-6">
           <div className="flex flex-wrap -mx-4">
@@ -85,29 +78,14 @@ export function ProductDetails() {
                     </a>
                   </div>
                 </div>
-                <div className="px-6 pb-6 mt-6 border-t border-gray-300 ">
-                  <div className="flex flex-wrap items-center mt-6">
-                    <h2 className="text-lg font-bold text-gray-700 border-b border-red-300  pb-1  ">
-                      تفکیک هزینه ها
-                    </h2>
-                  </div>
-                  <div className="mt-2 px-7">
-                    
-                   <Suspense fallback={<p>Loading feed...</p>}>
-                    <h3>قیمت ارزی :{totalPrice} درهم</h3>
-                    <h3>قیمت ارزی با تخفیف :{UAEPrice} درهم </h3>
-                    <h3>معادل قیمت ارزی :{IRPrice} تومان </h3>
-                    <h3>هزینه شیپینگ به درهم :{UAESheppingPrice} درهم </h3>
-                    <h3>هزینه شیپینگ به تومان :{IRSheppingPrice} تومان</h3>
-                    <h3>هزینه حمل و گمرک :{deliveryPrice} تومان</h3>
-                    <h3>کارمزد :{wagePrice}تومان </h3>
-                    </Suspense>
-                    
-                    <span className=" text-sm text-red-400 ">
-                    مدت زمان تحویل : 5 الی 8 هفته کاری
-                    </span>
-                  </div>
-                </div>
+
+                <BreakdownPrice productPrice={data} />
+
+                {/* {data?.price && <BreakdownPrice productPrice={data}/>} */}
+                {/* <BreakdownPrice productPrice={data?.price}/> */}
+                <span className=" text-sm text-red-400 ">
+                  مدت زمان تحویل : 5 الی 8 هفته کاری
+                </span>
               </div>
             </div>
             <div className="w-full px-4 md:w-1/2 ">
@@ -122,9 +100,7 @@ export function ProductDetails() {
                       $1800.99
                     </span>
                   </p> */}
-                  <p className="max-w-md text-gray-700 ">
-                    {data?.description}
-                  </p>
+                  <p className="max-w-md text-gray-700 ">{data?.description}</p>
                 </div>
                 {/* <div className="mb-8">
                   <h2 className="w-16 pb-1 mb-4 text-2xl font-bold border-b border-red-300  ">
@@ -235,7 +211,6 @@ export function ProductDetails() {
           </div>
         </div>
       </section>
-      
     </>
   );
 }
