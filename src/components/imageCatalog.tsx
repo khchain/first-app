@@ -1,9 +1,10 @@
 import React from 'react'
 
 export  function ImageCatalog(data) {
+    
   return (
     <>
-    <div className="w-full mb-8  md:mb-0">
+    <section>
               <div className="sticky top-0 z-50 overflow-hidden ">
                 <div className="relative mb-6 lg:mb-10 lg:h-2/4 ">
                   <img
@@ -63,7 +64,7 @@ export  function ImageCatalog(data) {
                   </div>
                 </div>
               </div>
-            </div>
+            </section>
     </>
   )
 }
