@@ -30,7 +30,7 @@ export function Searchbar() {
             <div className="ms:flex items-center px-2 rounded-lg space-x-4 mx-auto ">
               <Link
                 href={{
-                  pathname: "/productDetails",
+                  pathname: "/product",
                   query: { link : searchValue},
                 }}
               >
