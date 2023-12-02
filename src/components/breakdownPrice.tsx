@@ -13,14 +13,7 @@ export function BreakdownPrice(data) {
       UAESheppingPrice,
       IRSheppingPrice,
     } = calculetPrice(data.price);
-    // console.log(UAESheppingPrice);
-//   const UAEPrice = productPrice;
-//   const IRPrice = UAEPrice * 14000;
-//   const UAESheppingPrice = UAEPrice * 0.5;
-//   const IRSheppingPrice = UAESheppingPrice * 14000;
-//   const deliveryPrice = IRPrice * 0.5;
-//   const wagePrice = IRPrice * 0.5;
-//   const totalPrice = IRPrice + deliveryPrice + wagePrice;
+ 
   return (
     <>
       <div className="px-6 pb-6 mt-6 border-t border-gray-300 ">
