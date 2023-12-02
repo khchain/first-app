@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useSearchParams } from "next/navigation";
-import { calculetPrice, addCommasToNumber } from "../app/utils/pricecal";
 import { useFetchData } from "../hooks/useFetchData";
 import { BreakdownPrice } from "../components/breakdownPrice";
 import { ImageCatalog } from "../components/imageCatalog";
